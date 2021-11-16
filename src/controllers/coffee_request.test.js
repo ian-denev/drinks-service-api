@@ -17,4 +17,23 @@ describe("Test coffee API endpoint request", () => {
             name: "Latte",
         });
     });
+    test("GET /coffee - coffeeName: Americano", async () => {
+        const res = await request(app)
+            .get("/coffee")
+            .query({ coffeeName: 'Americano' });
+        expect(res.statusCode).toEqual(200);
+        expect(res.body).toEqual({
+            drinkType: "Coffee",
+            name: "Americano",
+        });
+    });
+    test("GET /coffee - no coffeeName", async () => {
+        const res = await request(app)
+            .get("/coffee");
+        expect(res.statusCode).toEqual(200);
+        expect(res.body).toEqual({
+            drinkType: "Coffee",
+            name: "Latte",
+        });
+    });
 });
